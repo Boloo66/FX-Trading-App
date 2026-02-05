@@ -4,6 +4,7 @@ import { FxRateService } from './fx-rate.service';
 
 @Module({
   controllers: [FxRateController],
-  providers: [FxRateService]
+  providers: [FxRateService],
+  exports: [FxRateService],
 })
 export class FxRateModule {}
