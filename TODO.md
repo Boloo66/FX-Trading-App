@@ -1,4 +1,4 @@
 # TODO
 
 - Test:
-  Due to time tests are not 100%, can be improved.
+  Due to time constraint, tests are not 100%, can be improved.
