@@ -216,16 +216,52 @@ pnpm run start:prod
 
 ### Database Migrations
 
+The project includes convenient Makefile commands for database migrations. Ensure the `Makefile` is properly named (case-sensitive) for the `make` command to work.
+
+#### Using Make Commands (Recommended)
+
 ```bash
+# Create a new empty migration (interactive - prompts for migration name)
+make migration-create
+
+# Generate a migration from entity changes
+make migration-generate
+
+# Run all pending migrations
+make migration-run
+
+# Revert the last migration
+make migration-revert
+
+# Show migration status
+make migration-show
+```
+
+#### Using pnpm Commands Directly
+
+```bash
+# Create a new empty migration
+pnpm run typeorm migration:create src/database/migrations/MigrationName
+
 # Generate migration from entities
-pnpm run typeorm migration:generate -- src/database/migrations/InitialSchema
+pnpm run typeorm migration:generate src/database/migrations/MigrationName -d src/database/data-source.ts
 
 # Run migrations
-pnpm run typeorm migration:run
+pnpm run typeorm migration:run -d src/database/data-source.ts
 
 # Revert last migration
-pnpm run typeorm migration:revert
+pnpm run typeorm migration:revert -d src/database/data-source.ts
+
+# Show migration status
+pnpm run typeorm migration:show -d src/database/data-source.ts
 ```
+
+#### Migration Workflow
+
+1. **Create/Generate a migration:** Use `make migration-generate` after modifying entities, or `make migration-create` for manual migrations
+2. **Review the migration:** Check the generated file in `src/database/migrations/`
+3. **Run migrations:** Execute `make migration-run` to apply changes to the database
+4. **Revert if needed:** Use `make migration-revert` if you need to undo the last migration
 
 ### Access Points
 
